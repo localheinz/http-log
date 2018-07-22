@@ -28,6 +28,16 @@ final class SectionHitsTest extends Framework\TestCase
         $this->assertClassImplementsInterface(SectionHitsInterface::class, SectionHits::class);
     }
 
+    public function testDefaults(): void
+    {
+        $section = $this->prophesize(SectionInterface::class);
+
+        $sectionHits = new SectionHits($section->reveal());
+
+        $this->assertSame($section->reveal(), $sectionHits->section());
+        $this->assertSame(1, $sectionHits->hits());
+    }
+
     /**
      * @dataProvider providerInvalidHits
      *
