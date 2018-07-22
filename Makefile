@@ -19,7 +19,6 @@ stan: vendor
 
 test: vendor
 	vendor/bin/phpunit --configuration=test/Unit/phpunit.xml
-	vendor/bin/phpunit --configuration=test/Integration/phpunit.xml
 
 vendor: composer.json composer.lock
 	composer self-update
