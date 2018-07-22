@@ -9,7 +9,8 @@
     }
   ],
   "require": {
-    "php": "^7.2"
+    "php": "^7.2",
+    "kassner/log-parser": "^1.4.0"
   },
   "require-dev": {
     "infection/infection": "~0.9.0",
