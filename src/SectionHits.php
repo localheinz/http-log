@@ -13,7 +13,7 @@ namespace Localheinz\Http\Log;
 final class SectionHits implements SectionHitsInterface
 {
     /**
-     * @var string
+     * @var SectionInterface
      */
     private $section;
 
@@ -23,17 +23,13 @@ final class SectionHits implements SectionHitsInterface
     private $hits;
 
     /**
-     * @param string $section
-     * @param int    $hits
+     * @param SectionInterface $section
+     * @param int              $hits
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(string $section, int $hits)
+    public function __construct(SectionInterface $section, int $hits)
     {
-        if ('' === \trim($section)) {
-            throw new \InvalidArgumentException('Section needs to be an non-empty and non-blank string.');
-        }
-
         if (0 > $hits) {
             throw new \InvalidArgumentException(\sprintf(
                 'Hits needs to be an integer equal to or greater than 0, but %d is not.',
@@ -41,11 +37,11 @@ final class SectionHits implements SectionHitsInterface
             ));
         }
 
-        $this->section = \trim($section);
+        $this->section = $section;
         $this->hits = $hits;
     }
 
-    public function section(): string
+    public function section(): SectionInterface
     {
         return $this->section;
     }
