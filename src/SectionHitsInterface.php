@@ -25,4 +25,11 @@ interface SectionHitsInterface
      * @return int
      */
     public function hits(): int;
+
+    /**
+     * Returns a cloned of the current section with an additional hit added.
+     *
+     * @return SectionHitsInterface
+     */
+    public function withAdditionalHit(): self;
 }

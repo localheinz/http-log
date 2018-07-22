@@ -50,4 +50,13 @@ final class SectionHits implements SectionHitsInterface
     {
         return $this->hits;
     }
+
+    public function withAdditionalHit(): SectionHitsInterface
+    {
+        $instance = clone $this;
+
+        ++$instance->hits;
+
+        return $instance;
+    }
 }

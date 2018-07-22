@@ -105,4 +105,19 @@ final class SectionHitsTest extends Framework\TestCase
             ];
         }
     }
+
+    public function testWithAdditionalHitClonesInstanceAndAddsHit(): void
+    {
+        $sectionHits = new SectionHits(
+            $this->prophesize(SectionInterface::class)->reveal(),
+            $this->faker()->numberBetween(1)
+        );
+
+        $mutated = $sectionHits->withAdditionalHit();
+
+        $this->assertInstanceOf(SectionHitsInterface::class, $sectionHits);
+        $this->assertNotSame($sectionHits, $mutated);
+        $this->assertSame($sectionHits->section(), $mutated->section());
+        $this->assertSame($sectionHits->hits() + 1, $mutated->hits());
+    }
 }
