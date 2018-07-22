@@ -28,7 +28,7 @@ final class SectionHits implements SectionHitsInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(SectionInterface $section, int $hits)
+    public function __construct(SectionInterface $section, int $hits = 1)
     {
         if (0 > $hits) {
             throw new \InvalidArgumentException(\sprintf(
