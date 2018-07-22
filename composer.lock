@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4a71c7a9d107152b3c30d9d0b0842921",
+    "content-hash": "24c22abb9ca8d99eb841688586767527",
     "packages": [
         {
             "name": "kassner/log-parser",
@@ -58,6 +58,55 @@
                 "parser"
             ],
             "time": "2018-03-21T13:49:33+00:00"
+        },
+        {
+            "name": "localheinz/clock",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/localheinz/clock.git",
+                "reference": "d558b89fde2025271b0cd99884867418a4030b60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/localheinz/clock/zipball/d558b89fde2025271b0cd99884867418a4030b60",
+                "reference": "d558b89fde2025271b0cd99884867418a4030b60",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "infection/infection": "~0.7.0",
+                "localheinz/php-cs-fixer-config": "~1.11.0",
+                "localheinz/test-util": "0.6.1",
+                "phpstan/phpstan": "~0.9.1",
+                "phpunit/phpunit": "^6.5.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Localheinz\\Clock\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Möller",
+                    "email": "am@localheinz.com"
+                }
+            ],
+            "description": "Provides a simple abstraction of a clock.",
+            "homepage": "https://github.com/localheinz/clock",
+            "keywords": [
+                "clock",
+                "system-clock",
+                "test-clock"
+            ],
+            "time": "2018-01-30T23:25:04+00:00"
         }
     ],
     "packages-dev": [
