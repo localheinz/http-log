@@ -1,0 +1,36 @@
+{
+  "name": "localheinz/http-log",
+  "description": "Provides a console application for analyzing an HTTP access log file.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Andreas Möller",
+      "email": "am@localheinz.com"
+    }
+  ],
+  "require": {
+    "php": "^7.2"
+  },
+  "require-dev": {
+    "infection/infection": "~0.9.0",
+    "localheinz/php-cs-fixer-config": "~1.14.1",
+    "localheinz/test-util": "~0.7.0",
+    "phpstan/phpstan": "~0.10.1",
+    "phpstan/phpstan-strict-rules": "~0.10.0",
+    "phpunit/phpunit": "^7.2.7"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "Localheinz\\Http\\Log\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Localheinz\\Http\\Log\\Test\\": "test/"
+    }
+  }
+}
