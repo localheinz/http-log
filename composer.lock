@@ -4,8 +4,62 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb23ec5358fcb44913f8ef075b2c64be",
-    "packages": [],
+    "content-hash": "4a71c7a9d107152b3c30d9d0b0842921",
+    "packages": [
+        {
+            "name": "kassner/log-parser",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kassner/log-parser.git",
+                "reference": "1250b60de8175d0477987cd7a2d27b695896dc20"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kassner/log-parser/zipball/1250b60de8175d0477987cd7a2d27b695896dc20",
+                "reference": "1250b60de8175d0477987cd7a2d27b695896dc20",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.4"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.11",
+                "phpmd/phpmd": "~2.1",
+                "phpunit/phpunit": "~4.4",
+                "sebastian/phpcpd": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Kassner": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Rafael Kassner",
+                    "email": "kassner@gmail.com",
+                    "homepage": "http://www.kassner.com.br/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Log Parser Library",
+            "homepage": "http://github.com/kassner/log-parser",
+            "keywords": [
+                "apache",
+                "format",
+                "log",
+                "log-format",
+                "nginx",
+                "parser"
+            ],
+            "time": "2018-03-21T13:49:33+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "composer/ca-bundle",
