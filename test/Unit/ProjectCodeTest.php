@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @see https://github.com/localheinz/http-log
  */
 
-namespace Localheinz\Repository\Test\Unit;
+namespace Localheinz\Http\Log\Test\Unit;
 
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
@@ -29,8 +29,8 @@ final class ProjectCodeTest extends Framework\TestCase
     {
         $this->assertClassesHaveTests(
             __DIR__ . '/../../src',
-            'Localheinz\\Repository\\',
-            'Localheinz\\Repository\\Test\\Unit\\'
+            'Localheinz\\Http\\Log\\',
+            'Localheinz\\Http\\Log\\Test\\Unit\\'
         );
     }
 
