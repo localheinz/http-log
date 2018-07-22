@@ -12,6 +12,7 @@ namespace Localheinz\Http\Log\Test\Unit;
 
 use Localheinz\Http\Log\SectionHits;
 use Localheinz\Http\Log\SectionHitsInterface;
+use Localheinz\Http\Log\SectionInterface;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
@@ -28,45 +29,13 @@ final class SectionHitsTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerInvalidSection
-     *
-     * @param string $section
-     */
-    public function testConstructorRejectsInvalidSectionName(string $section): void
-    {
-        $hits = $this->faker()->numberBetween(1);
-
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Section needs to be an non-empty and non-blank string.');
-
-        new SectionHits(
-            $section,
-            $hits
-        );
-    }
-
-    public function providerInvalidSection(): \Generator
-    {
-        $values = [
-            'string-empty' => '',
-            'string-blank' => '  ',
-        ];
-
-        foreach ($values as $key => $value) {
-            yield $key => [
-                $value,
-            ];
-        }
-    }
-
-    /**
      * @dataProvider providerInvalidHits
      *
      * @param int $hits
      */
     public function testConstructorRejectsInvalidHits(int $hits): void
     {
-        $section = $this->faker()->word;
+        $section = $this->prophesize(SectionInterface::class);
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(\sprintf(
@@ -75,7 +44,7 @@ final class SectionHitsTest extends Framework\TestCase
         ));
 
         new SectionHits(
-            $section,
+            $section->reveal(),
             $hits
         );
     }
@@ -95,58 +64,35 @@ final class SectionHitsTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerValidSectionAndHits
+     * @dataProvider providerValidHits
      *
-     * @param string $section
-     * @param int    $hits
+     * @param int $hits
      */
-    public function testConstructorSetsValues(string $section, int $hits): void
+    public function testConstructorSetsValues(int $hits): void
     {
+        $section = $this->prophesize(SectionInterface::class);
+
         $sectionHits = new SectionHits(
-            $section,
+            $section->reveal(),
             $hits
         );
 
-        $this->assertSame($section, $sectionHits->section());
+        $this->assertSame($section->reveal(), $sectionHits->section());
         $this->assertSame($hits, $sectionHits->hits());
     }
 
-    public function providerValidSectionAndHits(): \Generator
+    public function providerValidHits(): \Generator
     {
-        $faker = $this->faker();
-
-        $sections = [
-            $faker->word,
-            '/' . $faker->word,
+        $values = [
+            'int-zero' => 0,
+            'int-one' => 1,
+            'int-greater-than-one' => $this->faker()->numberBetween(2),
         ];
 
-        $hits = [
-            0,
-            1,
-            $faker->numberBetween(2),
-        ];
-
-        foreach ($sections as $section) {
-            foreach ($hits as $hit) {
-                yield [
-                    $section,
-                    $hit,
-                ];
-            }
+        foreach ($values as $key => $value) {
+            yield $key => [
+                $value,
+            ];
         }
-    }
-
-    public function testConstructorTrimsSection(): void
-    {
-        $faker = $this->faker();
-
-        $section = ' ' . $faker->word . ' ';
-
-        $sectionHits = new SectionHits(
-            $section,
-            $faker->numberBetween(1)
-        );
-
-        $this->assertSame(\trim($section), $sectionHits->section());
     }
 }

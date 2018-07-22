@@ -15,9 +15,9 @@ interface SectionHitsInterface
     /**
      * Returns the name of the section.
      *
-     * @return string
+     * @return SectionInterface
      */
-    public function section(): string;
+    public function section(): SectionInterface;
 
     /**
      * Returns the number of hits for this section.
