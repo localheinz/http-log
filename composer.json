@@ -10,6 +10,7 @@
   ],
   "require": {
     "php": "^7.2",
+    "fzaninotto/faker": "^1.8.0",
     "kassner/log-parser": "^1.4.0",
     "localheinz/clock": "^1.0.0",
     "react/event-loop": "~0.4.3",
