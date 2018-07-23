@@ -12,7 +12,8 @@
     "php": "^7.2",
     "kassner/log-parser": "^1.4.0",
     "localheinz/clock": "^1.0.0",
-    "react/event-loop": "~0.4.3"
+    "react/event-loop": "~0.4.3",
+    "react/filesystem": "~0.1.0"
   },
   "require-dev": {
     "infection/infection": "~0.9.0",
