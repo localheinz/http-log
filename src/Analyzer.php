@@ -72,7 +72,19 @@ final class Analyzer implements AnalyzerInterface
             return $entry->requestTime() >= $since;
         });
 
-        $seconds = $now->getTimestamp() - $since->getTimestamp();
+        if (0 === \count($requests)) {
+            return 0.0;
+        }
+
+        /** @var EntryInterface $oldestRequest */
+        $oldestRequest = \reset($requests);
+
+        $oldestTimestamp = \max(
+            $oldestRequest->requestTime()->getTimestamp(),
+            $since->getTimestamp()
+        );
+
+        $seconds = $now->getTimestamp() - $oldestTimestamp;
 
         return \count($requests) / $seconds;
     }

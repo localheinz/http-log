@@ -338,27 +338,33 @@ final class AnalyzerTest extends Framework\TestCase
         $this->assertSame(0.0, $requestsPerSecond);
     }
 
-    public function testRequestsPerSecondsReturnsEntriesSinceSinceDividedBySeconds(): void
+    public function testRequestsPerSecondsReturnsEntriesSinceSinceDividedBySecondsBetweenSinceAndNow(): void
     {
         $faker = $this->faker();
 
         $now = new \DateTimeImmutable();
 
-        $seconds = $faker->numberBetween(30, 600);
+        $since = $now->sub(new \DateInterval(\sprintf(
+            'PT%dS',
+            60
+        )));
 
-        $since = new \DateTimeImmutable(\sprintf(
-            '-%d seconds',
-            $seconds
-        ));
+        $requests = 100;
 
-        $entryCount = $faker->numberBetween(2, 300);
-
-        $entries = \array_map(function () use ($faker, $since, $seconds) {
-            $requestTime = $since->add(new \DateInterval(\sprintf(
+        $requestTimes = \array_map(function () use ($faker, $since) {
+            return $since->add(new \DateInterval(\sprintf(
                 'PT%dS',
-                $faker->numberBetween(1, $seconds)
+                $faker->numberBetween(0, 60)
             )));
+        }, \range(1, $requests - 1));
 
+        $requestTimes[] = $since;
+
+        \usort($requestTimes, function (\DateTimeImmutable $a, \DateTimeImmutable $b) {
+            return $a <=> $b;
+        });
+
+        $entries = \array_map(function (\DateTimeImmutable $requestTime) {
             $entry = $this->prophesize(EntryInterface::class);
 
             $entry
@@ -367,7 +373,7 @@ final class AnalyzerTest extends Framework\TestCase
                 ->willReturn($requestTime);
 
             return $entry;
-        }, \range(1, $entryCount));
+        }, $requestTimes);
 
         $log = $this->prophesize(LogInterface::class);
 
@@ -383,6 +389,64 @@ final class AnalyzerTest extends Framework\TestCase
             $since
         );
 
-        $this->assertEquals($entryCount / $seconds, $requestsPerSecond);
+        $seconds = $now->getTimestamp() - $since->getTimestamp();
+
+        $this->assertEquals($requests / $seconds, $requestsPerSecond);
+    }
+
+    public function testRequestsPerSecondsReturnsEntriesSinceSinceDividedBySecondsBetweenOldestRequestAndNow(): void
+    {
+        $faker = $this->faker();
+
+        $now = new \DateTimeImmutable();
+
+        $since = $now->sub(new \DateInterval(\sprintf(
+            'PT%dS',
+            60
+        )));
+
+        $requests = 100;
+
+        $requestTimes = \array_map(function () use ($faker, $since) {
+            return $since->add(new \DateInterval(\sprintf(
+                'PT%dS',
+                $faker->numberBetween(20, 60)
+            )));
+        }, \range(1, $requests));
+
+        \usort($requestTimes, function (\DateTimeImmutable $a, \DateTimeImmutable $b) {
+            return $a <=> $b;
+        });
+
+        $oldestRequestTime = \reset($requestTimes);
+
+        $entries = \array_map(function (\DateTimeImmutable $requestTime) {
+            $entry = $this->prophesize(EntryInterface::class);
+
+            $entry
+                ->requestTime()
+                ->shouldBeCalled()
+                ->willReturn($requestTime);
+
+            return $entry;
+        }, $requestTimes);
+
+        $log = $this->prophesize(LogInterface::class);
+
+        $log
+            ->entries()
+            ->shouldBeCalled()
+            ->willReturn($entries);
+
+        $analyzer = new Analyzer(new Clock\FrozenClock($now));
+
+        $requestsPerSecond = $analyzer->requestsPerSecond(
+            $log->reveal(),
+            $since
+        );
+
+        $seconds = $now->getTimestamp() - $oldestRequestTime->getTimestamp();
+
+        $this->assertEquals($requests / $seconds, $requestsPerSecond);
     }
 }
