@@ -256,6 +256,12 @@ final class DashboardCommand extends Console\Command\Command
             return $b->hits() <=> $a->hits();
         });
 
+        $sectionHitsSelected = \array_slice(
+            $sectionHits,
+            0,
+            10
+        );
+
         $requestsPerSecond = $this->analyzer->requestsPerSecond(
             $log,
             $now->sub(new \DateInterval(\sprintf(
@@ -268,7 +274,7 @@ final class DashboardCommand extends Console\Command\Command
 
         $this->renderSectionHits(
             $output,
-            $sectionHits
+            $sectionHitsSelected
         );
 
         $this->renderRequestsPerSecond(
