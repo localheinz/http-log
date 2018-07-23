@@ -38,5 +38,8 @@
     "psr-4": {
       "Localheinz\\Http\\Log\\Test\\": "test/"
     }
-  }
+  },
+  "bin": [
+    "bin/dashboard"
+  ]
 }

@@ -19,6 +19,10 @@
     stopOnSkipped="false"
     verbose="true"
 >
+    <php>
+        <!-- See https://github.com/symfony/console/blob/v4.1.1/Terminal.php#L24-L36 -->
+        <env name="COLUMNS" value="foo" />
+    </php>
     <testsuites>
         <testsuite name="Unit Tests">
             <directory>.</directory>

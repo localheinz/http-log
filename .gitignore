@@ -1,3 +1,5 @@
 /vendor/
+/var/log
+!/var/log/.gitkeep
 /.php_cs.cache
 /infection-log.txt

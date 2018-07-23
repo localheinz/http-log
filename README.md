@@ -13,6 +13,25 @@ Run
 $ composer global require localheinz/http-log
 ```
 
+## Usage
+
+Run
+
+```
+$ dashboard <path> --alert-threshold=<alert-threshold> --refresh-interval=<refresh-interval>
+```
+
+to render a dashboard.
+
+### Arguments
+
+* `path` (optional, defaults to `/var/log/access.log`), path to HTTP access log file
+
+### Options
+
+* `alert-threshold` (optional, defaults to `10`), number of requests per second (an integer) which, when exceeded, triggers an alert
+* `refresh-interval` (optional, defaults to `10`), number of seconds (an integer) after which the dashboard will be refreshed
+
 ## Contributing
 
 Please have a look at [`CONTRIBUTING.md`](.github/CONTRIBUTING.md).
