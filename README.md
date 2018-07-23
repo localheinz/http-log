@@ -32,6 +32,33 @@ to render a dashboard.
 * `alert-threshold` (optional, defaults to `10`), number of requests per second (an integer) which, when exceeded, triggers an alert
 * `refresh-interval` (optional, defaults to `10`), number of seconds (an integer) after which the dashboard will be refreshed
 
+## Demo
+
+Clone this repository.
+
+```
+$ git clone git@github.com:localheinz/http-log.git
+```
+
+Run
+
+```
+$ cd http-log
+$ composer install
+```
+
+Then run
+
+```
+$ php demo/write.php
+```
+
+open a separate terminal in the same directory and run
+
+```
+$ bin/dashboard
+```
+
 ## Contributing
 
 Please have a look at [`CONTRIBUTING.md`](.github/CONTRIBUTING.md).
